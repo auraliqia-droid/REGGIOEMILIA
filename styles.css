@@ -99,7 +99,7 @@ img {
 }
 
 .brand img {
-  height: 64px;
+  height: 80px;
   width: auto;
 }
 
@@ -188,7 +188,13 @@ img {
 
 .hero {
   padding: 90px 0 70px;
-  background: linear-gradient(135deg, rgba(1, 103, 177, 0.08), rgba(252, 195, 2, 0.1));
+  background: linear-gradient(
+    135deg,
+    rgba(1, 103, 177, 0.12),
+    rgba(131, 180, 16, 0.12),
+    rgba(252, 195, 2, 0.12),
+    rgba(227, 1, 25, 0.1)
+  );
   overflow: hidden;
 }
 
@@ -260,7 +266,7 @@ img {
 }
 
 .hero-media img {
-  max-width: min(80%, 260px);
+  max-width: min(85%, 320px);
   height: auto;
 }
 
@@ -295,7 +301,7 @@ img {
 }
 
 .orb-blue {
-  background: rgba(1, 103, 177, 0.2);
+  background: rgba(1, 103, 177, 0.35);
   width: 220px;
   height: 220px;
   top: 0;
@@ -303,7 +309,7 @@ img {
 }
 
 .orb-yellow {
-  background: rgba(252, 195, 2, 0.3);
+  background: rgba(252, 195, 2, 0.35);
   width: 160px;
   height: 160px;
   top: 120px;
@@ -311,7 +317,7 @@ img {
 }
 
 .orb-red {
-  background: rgba(227, 1, 25, 0.2);
+  background: rgba(227, 1, 25, 0.3);
   width: 140px;
   height: 140px;
   bottom: 0;
@@ -319,33 +325,35 @@ img {
 }
 
 .orb-green {
-  background: rgba(131, 180, 16, 0.2);
+  background: rgba(131, 180, 16, 0.3);
   width: 120px;
   height: 120px;
   bottom: 40px;
   right: 25%;
 }
 
-.hero-card {
-  position: absolute;
-  bottom: 20px;
-  right: 0;
-  background: var(--white);
+.promo-card {
+  display: grid;
+  gap: 16px;
   padding: 20px;
-  border-radius: 16px;
+  border-radius: 20px;
+  background: var(--white);
   box-shadow: var(--shadow);
-  max-width: 260px;
+  align-items: center;
+  text-align: center;
 }
 
-.hero-card::before {
-  content: "";
-  position: absolute;
-  top: -12px;
-  right: 24px;
-  width: 60px;
-  height: 6px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--red), var(--yellow), var(--green), var(--blue));
+.promo-card img {
+  width: min(100%, 240px);
+  height: auto;
+  justify-self: center;
+}
+
+.promo-title {
+  display: block;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 8px;
 }
 
 .section-grid {
@@ -643,6 +651,15 @@ img {
   .section-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: start;
+  }
+
+  .promo-card {
+    grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+    text-align: left;
+  }
+
+  .promo-card img {
+    justify-self: start;
   }
 
   .cards-grid {
