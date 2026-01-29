@@ -253,7 +253,7 @@ img {
 
 .hero-visual {
   position: relative;
-  min-height: 520px;
+  min-height: 600px;
 }
 
 .hero-media {
@@ -266,10 +266,11 @@ img {
 }
 
 .hero-media img {
-  max-width: min(100%, 620px);
+  max-width: min(100%, 720px);
   height: auto;
-  filter: blur(1.6px) drop-shadow(0 24px 55px rgba(1, 103, 177, 0.25));
-  transform: scale(1.02);
+  filter: drop-shadow(0 26px 60px rgba(1, 103, 177, 0.25));
+  -webkit-mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 68%, rgba(0, 0, 0, 0) 100%);
+  mask-image: radial-gradient(circle, rgba(0, 0, 0, 1) 68%, rgba(0, 0, 0, 0) 100%);
 }
 
 .hero-promo {
@@ -643,7 +644,7 @@ img {
   }
 
   .hero-media img {
-    max-width: 580px;
+    max-width: 680px;
   }
 
   .hero-actions {
@@ -700,7 +701,7 @@ img {
   }
 
   .hero-media img {
-    max-width: 680px;
+    max-width: 820px;
   }
 }
 
