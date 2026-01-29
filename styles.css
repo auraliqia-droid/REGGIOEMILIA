@@ -253,7 +253,7 @@ img {
 
 .hero-visual {
   position: relative;
-  min-height: 440px;
+  min-height: 520px;
 }
 
 .hero-media {
@@ -266,9 +266,10 @@ img {
 }
 
 .hero-media img {
-  max-width: min(98%, 520px);
+  max-width: min(100%, 620px);
   height: auto;
-  filter: drop-shadow(0 20px 45px rgba(1, 103, 177, 0.2));
+  filter: blur(1.6px) drop-shadow(0 24px 55px rgba(1, 103, 177, 0.25));
+  transform: scale(1.02);
 }
 
 .hero-promo {
@@ -642,7 +643,7 @@ img {
   }
 
   .hero-media img {
-    max-width: 480px;
+    max-width: 580px;
   }
 
   .hero-actions {
@@ -699,7 +700,7 @@ img {
   }
 
   .hero-media img {
-    max-width: 560px;
+    max-width: 680px;
   }
 }
 
