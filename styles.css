@@ -90,7 +90,7 @@ img {
 
 .bento-card {
   border-radius: 32px;
-  border: 1px solid rgba(1, 103, 177, 0.08);
+  border: 1px solid rgba(1, 103, 177, 0.12);
   padding: 24px;
   background: #fff;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
@@ -110,7 +110,7 @@ img {
   position: relative;
   overflow: hidden;
   padding: 120px 0 140px;
-  background: linear-gradient(180deg, var(--mint), var(--cream) 45%, #fff 100%);
+  background: linear-gradient(160deg, #d9f3e7 0%, #f7f4ef 35%, #ffe1c4 70%, #cfe9f7 100%);
 }
 
 .hero-curves .curve {
@@ -165,11 +165,99 @@ img {
 }
 
 .hero-title {
-  font-family: "Playfair Display", serif;
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.hero-feature h2 {
+  font-family: "Baloo 2", "Nunito", sans-serif;
 }
 
 .hero-cards {
   border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.hero-feature {
+  display: grid;
+  gap: 20px;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.98), rgba(255, 255, 255, 0.75));
+  border: 1px solid rgba(1, 103, 177, 0.1);
+}
+
+.hero-feature::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border-radius: 28px;
+  border: 2px dashed rgba(1, 103, 177, 0.15);
+  pointer-events: none;
+}
+
+.hero-feature-content {
+  display: grid;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-feature-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: rgba(1, 103, 177, 0.08);
+  color: var(--blue);
+}
+
+.badge:nth-child(2) {
+  background: rgba(227, 1, 25, 0.08);
+  color: var(--red);
+}
+
+.badge:nth-child(3) {
+  background: rgba(131, 180, 16, 0.12);
+  color: var(--green);
+}
+
+.hero-feature-mascot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+}
+
+.hero-gallery {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-card {
+  border-radius: 20px;
+  padding: 14px 16px;
+  background: rgba(207, 233, 247, 0.6);
+  border: 1px solid rgba(1, 103, 177, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+}
+
+.gallery-card:nth-child(2) {
+  background: rgba(255, 225, 196, 0.7);
+}
+
+.gallery-card:nth-child(3) {
+  background: rgba(217, 243, 231, 0.7);
 }
 
 .logo-spotlight {
@@ -256,6 +344,7 @@ img {
   padding: 8px 12px;
   border-radius: 16px;
   font-size: 0.75rem;
+  font-weight: 600;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 

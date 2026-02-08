@@ -1,6 +1,7 @@
 const menuToggle = document.querySelector('.menu-toggle');
 const primaryNav = document.querySelector('.primary-nav');
 const yearEl = document.getElementById('year');
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
@@ -21,7 +22,11 @@ if (menuToggle && primaryNav) {
 }
 
 const cursor = document.querySelector('.custom-cursor');
-if (cursor) {
+if (cursor && prefersReducedMotion) {
+  cursor.style.display = 'none';
+}
+
+if (cursor && !prefersReducedMotion) {
   window.addEventListener('mousemove', (event) => {
     cursor.style.left = `${event.clientX}px`;
     cursor.style.top = `${event.clientY}px`;
@@ -36,6 +41,9 @@ if (cursor) {
 
 const confettiColors = ['#0167b1', '#e30119', '#83b410', '#fcc302'];
 const createConfetti = (x, y) => {
+  if (prefersReducedMotion) {
+    return;
+  }
   for (let i = 0; i < 10; i += 1) {
     const confetti = document.createElement('span');
     confetti.className = 'confetti';
