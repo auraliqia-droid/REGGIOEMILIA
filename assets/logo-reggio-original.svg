@@ -1,0 +1,15 @@
+<svg width="900" height="240" viewBox="0 0 900 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="240" fill="white"/>
+  <g transform="translate(24 24)">
+    <rect x="0" y="0" width="200" height="200" rx="36" fill="#0B63B0"/>
+    <path d="M24 116L100 48L176 116V200H24V116Z" fill="white"/>
+    <rect x="24" y="116" width="46" height="84" fill="#E30119"/>
+    <rect x="130" y="116" width="46" height="84" fill="#83B410"/>
+    <rect x="84" y="146" width="32" height="54" fill="#FCC302"/>
+  </g>
+  <g transform="translate(260 64)" fill="#040404">
+    <text x="0" y="40" font-family="'Playfair Display', 'Georgia', serif" font-size="48" font-weight="700">Reggio Emilia</text>
+    <rect x="0" y="62" width="480" height="6" fill="#0167B1"/>
+    <text x="0" y="118" font-family="'Nunito', 'Arial', sans-serif" font-size="36" font-weight="600">Comunidad Educativa</text>
+  </g>
+</svg>
