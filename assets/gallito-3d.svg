@@ -1,0 +1,53 @@
+<svg width="520" height="520" viewBox="0 0 520 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="feather" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(260 210) rotate(90) scale(180 160)">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f0e9df"/>
+    </radialGradient>
+    <linearGradient id="beak" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFC857"/>
+      <stop offset="100%" stop-color="#F6A622"/>
+    </linearGradient>
+    <linearGradient id="comb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#E30119"/>
+    </linearGradient>
+    <linearGradient id="tailBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#45A3FF"/>
+      <stop offset="100%" stop-color="#0167B1"/>
+    </linearGradient>
+    <linearGradient id="tailGreen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#B7E563"/>
+      <stop offset="100%" stop-color="#83B410"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="22" stdDeviation="18" flood-color="#000" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  <rect width="520" height="520" rx="120" fill="#F7F4EF"/>
+  <g filter="url(#shadow)">
+    <ellipse cx="270" cy="420" rx="130" ry="26" fill="#D6CEC3"/>
+    <path d="M348 164C392 188 414 238 404 284C394 330 352 374 300 382C248 390 196 356 178 306C160 256 178 206 220 176C262 146 316 140 348 164Z" fill="url(#feather)"/>
+    <path d="M166 258C130 258 104 232 102 196C132 216 172 216 206 196C196 222 190 256 166 258Z" fill="#ffffff"/>
+    <path d="M152 260C118 258 92 230 92 198C122 216 162 218 196 198C188 224 178 258 152 260Z" fill="#EAE2D8"/>
+    <path d="M352 154C350 120 368 98 396 90C380 114 382 140 392 156C376 154 366 154 352 154Z" fill="url(#comb)"/>
+    <path d="M310 126C304 98 322 72 348 64C338 92 344 114 356 130C338 128 322 128 310 126Z" fill="url(#comb)"/>
+    <circle cx="330" cy="196" r="16" fill="#1F1F1F"/>
+    <circle cx="334" cy="192" r="6" fill="#ffffff"/>
+    <path d="M336 214L390 238L334 266C324 252 324 228 336 214Z" fill="url(#beak)"/>
+    <path d="M296 228C306 252 300 280 280 294C260 308 230 302 214 284C232 280 244 266 252 248C268 254 282 246 296 228Z" fill="#E30119"/>
+    <path d="M168 330C132 324 108 290 110 252C142 278 190 276 226 250C214 286 198 330 168 330Z" fill="#ffffff"/>
+    <g>
+      <path d="M120 164C84 182 68 214 66 254C76 232 98 222 128 216C148 212 172 210 190 202C176 186 152 154 120 164Z" fill="url(#tailBlue)"/>
+      <path d="M140 188C110 200 94 224 90 254C108 238 132 234 158 230C178 226 200 222 216 214C198 198 172 178 140 188Z" fill="#FCC302"/>
+      <path d="M160 210C132 222 118 244 114 274C134 256 160 252 188 246C208 240 228 236 244 226C226 212 194 200 160 210Z" fill="url(#tailGreen)"/>
+    </g>
+    <path d="M288 292C314 294 332 304 348 322C360 334 366 350 366 370C340 356 316 354 288 360C284 338 284 314 288 292Z" fill="#A06CFF"/>
+    <path d="M276 282C308 278 336 284 356 300C340 304 326 314 318 328C302 324 288 324 270 330C270 312 270 296 276 282Z" fill="#7B4DFF"/>
+    <rect x="300" y="318" width="56" height="54" rx="16" fill="#ffffff" stroke="#E6DFD6" stroke-width="2"/>
+    <circle cx="328" cy="344" r="14" fill="#0167B1"/>
+    <path d="M316 350L328 332L340 350" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M222 370C216 396 208 414 200 434H248C252 412 260 392 274 376C258 368 240 366 222 370Z" fill="#FCC302"/>
+    <path d="M262 382C254 402 252 416 252 434H298C304 416 312 402 324 390C310 380 288 376 262 382Z" fill="#FCC302"/>
+  </g>
+</svg>

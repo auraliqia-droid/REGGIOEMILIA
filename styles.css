@@ -6,6 +6,10 @@
   --black: #040404;
   --gray: #5f6368;
   --cream: #f7f4ef;
+  --sand: #efe6da;
+  --sky: #cfe9f7;
+  --peach: #ffe1c4;
+  --mint: #d9f3e7;
 }
 
 * {
@@ -18,10 +22,11 @@ html {
 
 body {
   margin: 0;
-  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+  font-family: "Nunito", "Segoe UI", system-ui, sans-serif;
   color: var(--black);
   background: #fff;
   line-height: 1.6;
+  cursor: none;
 }
 
 a {
@@ -55,7 +60,9 @@ img {
 }
 
 .section {
+  position: relative;
   padding: 96px 0;
+  overflow: hidden;
 }
 
 .site-header {
@@ -65,6 +72,10 @@ img {
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(1, 103, 177, 0.08);
+}
+
+.brand-logo {
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.12));
 }
 
 .menu-toggle {
@@ -81,6 +92,7 @@ img {
   padding: 24px;
   background: #fff;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.06);
+  position: relative;
 }
 
 .btn-bounce {
@@ -88,8 +100,168 @@ img {
 }
 
 .btn-bounce:hover {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 18px 40px rgba(1, 103, 177, 0.2);
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(1, 103, 177, 0.2);
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 120px 0 140px;
+  background: linear-gradient(180deg, var(--mint), var(--cream) 45%, #fff 100%);
+}
+
+.hero-curves .curve {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: var(--sky);
+  opacity: 0.6;
+  filter: blur(0);
+}
+
+.hero-curves .curve-one {
+  top: -120px;
+  left: -120px;
+  background: var(--sky);
+}
+
+.hero-curves .curve-two {
+  bottom: -160px;
+  right: 10%;
+  background: var(--peach);
+}
+
+.hero-curves .curve-three {
+  top: 30%;
+  right: -120px;
+  background: var(--mint);
+}
+
+.hero-illustrations {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-clouds {
+  position: absolute;
+  top: 40px;
+  left: 10%;
+  width: 480px;
+  opacity: 0.8;
+}
+
+.hero-trees {
+  position: absolute;
+  bottom: 20px;
+  right: 6%;
+  width: 520px;
+  opacity: 0.35;
+}
+
+.hero-title {
+  font-family: "Playfair Display", serif;
+}
+
+.hero-cards {
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.logo-spotlight {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.logo-glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(1, 103, 177, 0.15);
+  filter: blur(20px);
+  z-index: 0;
+}
+
+.hero-logo {
+  width: min(220px, 60%);
+  height: auto;
+  object-fit: contain;
+  z-index: 1;
+  filter: drop-shadow(0 16px 30px rgba(1, 103, 177, 0.22));
+}
+
+.mascot-showcase {
+  display: grid;
+  gap: 20px;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.mascot-visual {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.mascot-3d {
+  width: min(260px, 90%);
+  height: auto;
+  object-fit: contain;
+  animation: mascotFloat 6s ease-in-out infinite;
+}
+
+.speech-bubble {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.mascot-float {
+  position: fixed;
+  right: 24px;
+  top: 40%;
+  transform: translateY(-50%);
+  z-index: 30;
+  pointer-events: none;
+}
+
+.mascot-float-img {
+  width: 140px;
+  height: auto;
+  opacity: 0.85;
+  animation: mascotFloat 8s ease-in-out infinite;
+}
+
+.section-illustrations {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-illustrations .illustration.sun {
+  position: absolute;
+  top: 10%;
+  right: 8%;
+  width: 120px;
+}
+
+.section-illustrations .illustration.flowers {
+  position: absolute;
+  bottom: 5%;
+  left: 4%;
+  width: 220px;
 }
 
 .reveal {
@@ -103,54 +275,34 @@ img {
   transform: translateY(0) scale(1);
 }
 
-.floating-orb {
-  position: absolute;
-  width: 260px;
-  height: 260px;
-  border-radius: 50%;
-  filter: blur(0px);
-  opacity: 0.18;
-  animation: float 14s ease-in-out infinite;
-}
-
-.orb-blue {
-  background: var(--blue);
-  top: -80px;
-  left: -60px;
-}
-
-.orb-yellow {
-  background: var(--yellow);
-  bottom: -120px;
-  right: 10%;
-  animation-delay: 1.5s;
-}
-
-.orb-red {
-  background: var(--red);
-  top: 25%;
-  right: -100px;
-  width: 200px;
-  height: 200px;
-  animation-delay: 2.5s;
-}
-
-.orb-green {
-  background: var(--green);
-  bottom: 10%;
-  left: 15%;
-  width: 220px;
-  height: 220px;
-  animation-delay: 0.5s;
-}
-
-@keyframes float {
+@keyframes mascotFloat {
   0%,
   100% {
-    transform: translateY(0px);
+    transform: translateY(0) rotate(0deg);
   }
   50% {
-    transform: translateY(18px);
+    transform: translateY(-10px) rotate(1deg);
+  }
+}
+
+.confetti {
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 60;
+  animation: confettiFall 1.4s ease-out forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(0.4);
+    opacity: 0;
   }
 }
 
@@ -175,8 +327,56 @@ img {
   height: 26px;
 }
 
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(1, 103, 177, 0.6);
+  background: rgba(1, 103, 177, 0.1);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.2s ease, background 0.2s ease, border 0.2s ease;
+  z-index: 100;
+  mix-blend-mode: multiply;
+}
+
+.custom-cursor.is-active {
+  transform: translate(-50%, -50%) scale(1.4);
+  background: rgba(252, 195, 2, 0.2);
+  border-color: rgba(252, 195, 2, 0.8);
+}
+
+@media (max-width: 900px) {
+  body {
+    cursor: auto;
+  }
+
+  .custom-cursor {
+    display: none;
+  }
+
+  .mascot-float {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .section {
     padding: 72px 0;
+  }
+
+  .hero {
+    padding: 96px 0 120px;
+  }
+
+  .hero-clouds {
+    width: 320px;
+  }
+
+  .hero-trees {
+    width: 320px;
   }
 }
