@@ -165,7 +165,12 @@ img {
 }
 
 .hero-title {
-  font-family: "Playfair Display", serif;
+  font-family: "Baloo 2", "Nunito", sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.hero-feature h2 {
+  font-family: "Baloo 2", "Nunito", sans-serif;
 }
 
 .hero-cards {
