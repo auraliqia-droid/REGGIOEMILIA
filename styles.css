@@ -205,6 +205,21 @@ img {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+.mascot-institutional-card {
+  display: grid;
+  gap: 16px;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.mascot-institutional {
+  width: min(260px, 100%);
+  height: auto;
+  object-fit: contain;
+  justify-self: center;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.12));
+}
+
 .mascot-visual {
   position: relative;
   display: grid;
