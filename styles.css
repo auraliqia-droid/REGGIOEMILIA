@@ -26,7 +26,7 @@ body {
   color: var(--black);
   background: #fff;
   line-height: 1.6;
-  cursor: none;
+  cursor: auto;
 }
 
 a {
@@ -34,9 +34,21 @@ a {
   color: inherit;
 }
 
+
+:focus-visible {
+  outline: 3px solid rgba(1, 103, 177, 0.45);
+  outline-offset: 3px;
+}
+
 img {
   display: block;
   max-width: 100%;
+}
+
+a,
+button,
+[role="button"] {
+  cursor: pointer;
 }
 
 .skip-link {
@@ -449,6 +461,7 @@ img {
 }
 
 .custom-cursor {
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
@@ -470,13 +483,17 @@ img {
   border-color: rgba(252, 195, 2, 0.8);
 }
 
-@media (max-width: 900px) {
-  body {
-    cursor: auto;
-  }
+body.has-custom-cursor .custom-cursor {
+  display: block;
+}
 
+body.has-custom-cursor {
+  cursor: none;
+}
+
+@media (max-width: 900px) {
   .custom-cursor {
-    display: none;
+    display: none !important;
   }
 
   .mascot-float {
