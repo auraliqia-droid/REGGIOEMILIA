@@ -308,6 +308,13 @@ button,
   object-fit: contain;
 }
 
+.secondary-logo-image {
+  margin-top: 14px;
+  width: min(360px, 100%);
+  height: auto;
+  object-fit: contain;
+}
+
 
 .section-illustrations {
   position: absolute;
