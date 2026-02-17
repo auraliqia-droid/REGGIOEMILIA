@@ -30,7 +30,7 @@ if (cursor && canUseCustomCursor) {
     cursor.style.top = `${event.clientY}px`;
   });
 
-  const interactiveTargets = document.querySelectorAll('a, button, .cursor-fun');
+  const interactiveTargets = document.querySelectorAll('a, button');
   interactiveTargets.forEach((target) => {
     target.addEventListener('mouseenter', () => cursor.classList.add('is-active'));
     target.addEventListener('mouseleave', () => cursor.classList.remove('is-active'));
@@ -58,7 +58,7 @@ const createConfetti = (x, y) => {
   }
 };
 
-const confettiTriggers = document.querySelectorAll('.confetti-trigger, .cursor-fun');
+const confettiTriggers = document.querySelectorAll('.confetti-trigger');
 confettiTriggers.forEach((trigger) => {
   trigger.addEventListener('click', (event) => {
     createConfetti(event.clientX, event.clientY);

@@ -87,7 +87,6 @@ button,
 }
 
 .brand-logo {
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.12));
   max-width: 220px;
   height: auto;
 }
@@ -241,11 +240,15 @@ button,
   color: var(--green);
 }
 
-.hero-feature-mascot {
-  position: relative;
+.hero-feature-logo {
   display: grid;
   place-items: center;
   z-index: 1;
+}
+
+.hero-feature-logo-image {
+  width: min(280px, 90%);
+  height: auto;
 }
 
 .hero-gallery {
@@ -295,86 +298,16 @@ button,
   height: auto;
   object-fit: contain;
   z-index: 1;
-  filter: drop-shadow(0 16px 30px rgba(1, 103, 177, 0.22));
 }
 
-.mascot-showcase {
-  display: grid;
-  gap: 20px;
-  align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
 
-.mascot-institutional-card {
-  display: grid;
-  gap: 16px;
-  align-items: center;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-}
-
-.mascot-institutional {
-  width: min(260px, 100%);
-  height: auto;
-  object-fit: contain;
-  justify-self: center;
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.12));
-}
-
-.mascot-visual {
-  position: relative;
-  display: grid;
-  place-items: center;
-}
-
-.section-mascot {
+.section-illustration-image {
   margin-top: 16px;
   width: min(220px, 100%);
   height: auto;
   object-fit: contain;
 }
 
-.section-mascot-3d {
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.12));
-}
-
-.section-mascot-logo {
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
-}
-
-.mascot-3d {
-  width: min(320px, 100%);
-  height: auto;
-  object-fit: contain;
-  animation: mascotFloat 6s ease-in-out infinite;
-}
-
-.speech-bubble {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: #fff;
-  padding: 8px 12px;
-  border-radius: 16px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
-}
-
-.mascot-float {
-  position: fixed;
-  right: 24px;
-  top: 40%;
-  transform: translateY(-50%);
-  z-index: 30;
-  pointer-events: none;
-}
-
-.mascot-float-img {
-  width: 160px;
-  height: auto;
-  opacity: 0.85;
-  animation: mascotFloat 8s ease-in-out infinite;
-}
 
 .section-illustrations {
   position: absolute;
@@ -408,15 +341,6 @@ button,
   transform: translateY(0) scale(1);
 }
 
-@keyframes mascotFloat {
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(1deg);
-  }
-}
 
 .confetti {
   position: fixed;
@@ -496,9 +420,7 @@ body.has-custom-cursor {
     display: none !important;
   }
 
-  .mascot-float {
-    display: none;
-  }
+
 }
 
 @media (max-width: 768px) {
