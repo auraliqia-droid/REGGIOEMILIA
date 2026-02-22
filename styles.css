@@ -309,6 +309,44 @@ button,
 }
 
 
+.quienes-gallery {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.quienes-gallery-item {
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(1, 103, 177, 0.12);
+  background: #fff;
+}
+
+.quienes-gallery-item img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.quienes-gallery-item figcaption {
+  padding: 10px 12px;
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+.quienes-gallery-item.is-fallback img {
+  display: none;
+}
+
+.quienes-gallery-item.is-fallback::before {
+  content: "Añade assets/quienes-somos-1.jpg, -2.jpg y -3.jpg para mostrar las fotos";
+  display: block;
+  padding: 24px 12px;
+  color: var(--gray);
+  font-size: 0.78rem;
+}
+
 .section-illustrations {
   position: absolute;
   inset: 0;
