@@ -2,6 +2,7 @@ const menuToggle = document.querySelector('.menu-toggle');
 const primaryNav = document.querySelector('.primary-nav');
 const yearEl = document.getElementById('year');
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const canUseCustomCursor = window.matchMedia('(pointer: fine)').matches && !prefersReducedMotion;
 
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
@@ -22,21 +23,20 @@ if (menuToggle && primaryNav) {
 }
 
 const cursor = document.querySelector('.custom-cursor');
-if (cursor && prefersReducedMotion) {
-  cursor.style.display = 'none';
-}
-
-if (cursor && !prefersReducedMotion) {
+if (cursor && canUseCustomCursor) {
+  document.body.classList.add('has-custom-cursor');
   window.addEventListener('mousemove', (event) => {
     cursor.style.left = `${event.clientX}px`;
     cursor.style.top = `${event.clientY}px`;
   });
 
-  const interactiveTargets = document.querySelectorAll('a, button, .cursor-fun');
+  const interactiveTargets = document.querySelectorAll('a, button');
   interactiveTargets.forEach((target) => {
     target.addEventListener('mouseenter', () => cursor.classList.add('is-active'));
     target.addEventListener('mouseleave', () => cursor.classList.remove('is-active'));
   });
+} else if (cursor) {
+  document.body.classList.remove('has-custom-cursor');
 }
 
 const confettiColors = ['#0167b1', '#e30119', '#83b410', '#fcc302'];
@@ -58,7 +58,7 @@ const createConfetti = (x, y) => {
   }
 };
 
-const confettiTriggers = document.querySelectorAll('.confetti-trigger, .cursor-fun');
+const confettiTriggers = document.querySelectorAll('.confetti-trigger');
 confettiTriggers.forEach((trigger) => {
   trigger.addEventListener('click', (event) => {
     createConfetti(event.clientX, event.clientY);
