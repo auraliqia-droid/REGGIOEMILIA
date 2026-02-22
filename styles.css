@@ -329,22 +329,19 @@ button,
   object-fit: cover;
 }
 
+.quienes-photo {
+  background: #f7f4ef;
+}
+
 .quienes-gallery-item figcaption {
   padding: 10px 12px;
   font-size: 0.8rem;
   color: var(--gray);
 }
 
-.quienes-gallery-item.is-fallback img {
-  display: none;
-}
-
-.quienes-gallery-item.is-fallback::before {
-  content: "Añade assets/quienes-somos-1.jpg, -2.jpg y -3.jpg para mostrar las fotos";
-  display: block;
-  padding: 24px 12px;
-  color: var(--gray);
-  font-size: 0.78rem;
+.quienes-gallery-item.using-fallback figcaption::after {
+  content: " (mostrando imagen temporal)";
+  color: #8a8f95;
 }
 
 .section-illustrations {

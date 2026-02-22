@@ -144,3 +144,17 @@ if (window.gsap && window.ScrollTrigger) {
 if (window.lucide) {
   window.lucide.createIcons();
 }
+
+const quienesPhotos = document.querySelectorAll('.quienes-photo[data-photo-src]');
+quienesPhotos.forEach((img) => {
+  const desiredSrc = img.getAttribute('data-photo-src');
+  if (!desiredSrc) return;
+  const testImage = new Image();
+  testImage.onload = () => {
+    img.src = desiredSrc;
+  };
+  testImage.onerror = () => {
+    img.closest('.quienes-gallery-item')?.classList.add('using-fallback');
+  };
+  testImage.src = desiredSrc;
+});
