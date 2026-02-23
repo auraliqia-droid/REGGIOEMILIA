@@ -75,7 +75,6 @@ img {
 }
 
 .brand-logo {
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.12));
   max-width: 220px;
   height: auto;
 }
@@ -169,6 +168,73 @@ img {
   letter-spacing: 0.5px;
 }
 
+.hero-feature {
+  display: grid;
+  gap: 22px;
+}
+
+.hero-feature-content {
+  display: grid;
+  gap: 12px;
+}
+
+.hero-feature-mascot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  border: 1px solid rgba(1, 103, 177, 0.16);
+  background: #fff;
+  padding: 16px;
+}
+
+.hero-main-logo {
+  width: min(100%, 460px);
+  height: auto;
+  object-fit: contain;
+}
+
+.hero-feature-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge {
+  border-radius: 999px;
+  border: 1px solid rgba(1, 103, 177, 0.2);
+  background: rgba(255, 255, 255, 0.88);
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.hero-gallery {
+  display: grid;
+  gap: 10px;
+}
+
+.gallery-card {
+  border-radius: 16px;
+  border: 1px solid rgba(1, 103, 177, 0.14);
+  background: #fff;
+  padding: 12px 14px;
+}
+
+.logo-spotlight {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.hero-logo {
+  width: min(100%, 400px);
+  height: auto;
+  object-fit: contain;
+}
+
 /* GALERÍA DE IMÁGENES */
 .section-gallery {
   background: linear-gradient(180deg, #f7f4ef 0%, #ffe1c4 50%, #d9f3e7 100%);
@@ -189,6 +255,17 @@ img {
 
 .section-header p {
   margin-top: 12px;
+}
+
+.who-copy {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.who-copy p {
+  margin: 0;
+  color: var(--black);
 }
 
 .gallery-grid {
@@ -500,6 +577,56 @@ img {
   .who-tooltip {
     transition: none;
   }
+}
+
+.philosophy-section {
+  background: linear-gradient(180deg, #ffffff 0%, #f7f4ef 100%);
+}
+
+.philosophy-card {
+  display: grid;
+  gap: 14px;
+}
+
+.philosophy-card p {
+  margin: 0;
+}
+
+.philosophy-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.contact-section {
+  background: linear-gradient(180deg, #f5fbff 0%, #ffffff 100%);
+}
+
+.contact-card {
+  display: grid;
+  gap: 12px;
+}
+
+.contact-card p {
+  margin: 0;
+}
+
+.contact-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.enrollment-section {
+  background: linear-gradient(180deg, #fff8ef 0%, #ffffff 100%);
+}
+
+.enrollment-card {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+}
+
+.enrollment-card p {
+  margin: 0;
 }
 
 /* ANIMACIONES */
