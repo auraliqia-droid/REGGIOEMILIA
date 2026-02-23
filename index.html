@@ -76,7 +76,6 @@
     </script>
   </head>
   <body class="bg-white text-reggio-black">
-    <div class="custom-cursor" aria-hidden="true"></div>
     <a class="skip-link" href="#contenido">Saltar al contenido principal</a>
 
     <header class="site-header">
@@ -159,12 +158,8 @@
           <span class="curve curve-two"></span>
           <span class="curve curve-three"></span>
         </div>
-        <div class="hero-illustrations" aria-hidden="true">
-          <img src="assets/clouds.svg" alt="" class="hero-clouds parallax" />
-          <img src="assets/trees.svg" alt="" class="hero-trees parallax" />
-        </div>
-        <div class="container relative z-10 grid items-center gap-12 lg:grid-cols-12">
-          <div class="space-y-6 lg:col-span-5" data-animate>
+        <div class="container relative z-10 grid items-start gap-8 lg:grid-cols-12">
+          <div class="space-y-4 lg:col-span-5" data-animate>
             <p class="text-sm font-semibold uppercase tracking-wide text-reggio-red">Xalapa, Veracruz · Educación infantil y primaria</p>
             <h1 class="hero-title text-4xl font-extrabold text-reggio-blue md:text-5xl">
               Comunidad Educativa <span class="text-reggio-red">Reggio Emilia</span>
@@ -172,7 +167,7 @@
             <p class="text-lg font-semibold text-reggio-black">
               En Reggio Emilia cada niño es visto como infinitamente capaz, creativo e inteligente.
             </p>
-            <p class="text-base text-reggio-gray">
+            <p class="hero-description text-base text-reggio-gray">
               Somos una institución privada en Xalapa que ofrece educación infantil y primaria. Nuestra comunidad ve al
               niño no como un ser vacío que debe ser llenado, sino como un protagonista activo con derechos y un inmenso
               potencial de desarrollo.
@@ -214,8 +209,8 @@
                   <i data-lucide="school"></i>
                 </span>
                 <div>
-                  <p class="text-xs font-semibold uppercase text-reggio-gray">Antigüedad</p>
-                  <p class="text-sm font-semibold text-reggio-black">12 AÑOS</p>
+                  <p class="text-xs font-semibold uppercase text-reggio-gray">Acompañamiento</p>
+                  <p class="text-sm font-semibold text-reggio-black">Atención cercana para cada familia</p>
                 </div>
               </div>
             </div>
@@ -226,24 +221,13 @@
                 <p class="text-xs uppercase tracking-wide text-reggio-gray">Inspiración Reggio Emilia</p>
                 <h2 class="text-2xl font-semibold text-reggio-black">Más que un colegio, un Atelier de vida.</h2>
                 <p class="text-sm text-reggio-gray">
-                  En Reggio Emilia transformamos la educación tradicional en una experiencia de co-construcción.
+                  Una comunidad de aprendizaje en la que cada experiencia abre nuevas formas de descubrir, crear y compartir.
                 </p>
                 <div class="hero-feature-badges">
                   <span class="badge">Comunidad viva</span>
                   <span class="badge">Cien lenguajes</span>
                   <span class="badge">Protagonismo infantil</span>
                 </div>
-              </div>
-              <div class="hero-feature-mascot">
-                <img
-                  src="LOGO REGGIO EMILIA_VERSION HORIZONTAL_COLOR RGB.png"
-                  alt="Logo original de Comunidad Educativa Reggio Emilia"
-                  class="hero-main-logo"
-                  loading="eager"
-                  decoding="async"
-                  width="2987"
-                  height="1129"
-                />
               </div>
               <div class="hero-gallery">
                 <div class="gallery-card">
@@ -260,17 +244,18 @@
                 </div>
               </div>
             </div>
-            <div class="logo-spotlight bento-card reveal" data-animate>
+            <div class="mascot-spotlight bento-card reveal" data-animate>
+              <p class="text-xs font-semibold uppercase tracking-wide text-reggio-blue">Mascota institucional</p>
               <img
-                src="LOGO REGGIO EMILIA_VERSION HORIZONTAL_COLOR RGB.png"
-                alt="Logo original de Comunidad Educativa Reggio Emilia"
-                class="hero-logo"
-                loading="lazy"
+                src="mascota 2"
+                alt="Mascota institucional de Comunidad Educativa Reggio Emilia"
+                class="hero-mascot mascot-float"
+                loading="eager"
                 decoding="async"
-                width="2987"
-                height="1129"
+                width="1280"
+                height="471"
               />
-              <p class="text-xs font-semibold uppercase tracking-wide text-reggio-gray">Comunidad Educativa</p>
+              <p class="text-sm text-reggio-gray">Acompañando el recorrido de las familias desde el primer vistazo.</p>
             </div>
           </div>
         </div>
@@ -278,126 +263,104 @@
 
       <section id="quienes-somos" class="section section-gallery">
         <div class="container">
-          <div class="section-header" data-animate>
-            <p class="text-sm font-semibold uppercase tracking-wide text-reggio-red">Quiénes somos</p>
+          <div class="section-header who-header" data-animate>
+            <p class="text-sm font-semibold uppercase tracking-wide text-reggio-red">Comunidad Educativa Reggio Emilia</p>
             <h2 class="text-4xl font-bold text-reggio-blue md:text-5xl">Quiénes somos</h2>
-            <p class="text-base text-reggio-gray">DATOS PARA INTEGRAR EN EL PROCESO DE AUTOMATIZACIÓN AURALIQIA</p>
+            <p class="text-base text-reggio-gray">Colegio de Educación Inicial y Preescolar en Xalapa, Veracruz.</p>
           </div>
 
-          <div class="who-highlights" data-animate>
-            <div class="highlight-chip">
-              <span class="highlight-dot"></span>
-              <span>Educación Inicial y Preescolar</span>
+          <article class="who-intro bento-card" data-animate>
+            <figure class="who-intro-mascot-wrap">
+              <img
+                src="mascota 2"
+                alt="Mascota institucional en introducción de la sección Quiénes somos"
+                class="who-intro-mascot mascot-float"
+                loading="lazy"
+                decoding="async"
+                sizes="(min-width: 1024px) 24vw, 55vw"
+                width="1280"
+                height="471"
+              />
+            </figure>
+            <div class="who-intro-copy">
+              <p>
+                En Comunidad Educativa Reggio Emilia creemos en hacer comunidad, integrando familias que resuenen con una
+                visión del niño como un ser capaz, inteligente y creativo.
+              </p>
+              <div class="who-highlights">
+                <span class="highlight-chip"><span class="highlight-dot"></span>Cien lenguajes</span>
+                <span class="highlight-chip"><span class="highlight-dot"></span>Protagonismo infantil</span>
+                <span class="highlight-chip"><span class="highlight-dot"></span>Aprendizaje a través de la experiencia</span>
+              </div>
             </div>
-            <div class="highlight-chip">
-              <span class="highlight-dot"></span>
-              <span>Cien Lenguajes</span>
-            </div>
-            <div class="highlight-chip">
-              <span class="highlight-dot"></span>
-              <span>12 Años de Trayectoria</span>
-            </div>
-          </div>
-
-          <article class="who-copy bento-card" data-animate>
-            <p><strong>NOMBRE COMERCIAL:</strong> COMUNIDAD EDUCATIVA REGGIO EMILIA</p>
-            <p><strong>PERFIL:</strong> COLEGIO DE EDUCACIÓN INICIAL Y PREESCOLAR EN XALAPA, VERACRUZ</p>
-            <p>TEXTO PARA ACOMPAÑAR LA IMPLEMENTACIÓN DEL PROCESO DE AUTOMATIZACIÓN DEL COLEGIO COMUNIDAD EDUCATIVA REGGIO EMILIA</p>
-            <p>En Reggio Emilia hacemos comunidad, integrando familias que resuenen con una visión del niño como un ser capaz, inteligente y creativo.</p>
-            <p>¿Sabías que un niño tiene cien lenguajes, pero le robamos noventa y nueve? 🎨✨</p>
-            <p>En Reggio Emilia, no llenamos baldes vacíos; encendemos fuegos.</p>
-            <p>
-              Aquí, tu hijo/a no viene a sentarse y escuchar; viene a investigar, a crear con sus manos y a ser el protagonista de su propia historia de aprendizaje.
-            </p>
-            <p>📍 ¿Quieres ver cómo luce el respeto por la infancia?</p>
-            <p>Agenda una visita personalizada y descubre por qué somos el lugar donde los "cien lenguajes" cobran vida.</p>
-            <p>#ReggioEmilia #PrimeraInfancia #EducaciónConsiente #CienLenguajes #MaternalYPreescolar</p>
           </article>
 
-          <div class="who-grid" data-animate>
-            <figure class="who-photo-card">
-              <img
-                src="WhatsApp Image 2026-02-08 at 2.09.30 PM.jpeg"
-                alt="Niñas y niños explorando dibujo en aula"
-                class="who-photo"
-                loading="lazy"
-                decoding="async"
-                sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 100vw"
-                width="1600"
-                height="1204"
-              />
-            </figure>
-
-            <figure class="who-photo-card">
-              <img
-                src="WhatsApp Image 2026-02-08 at 2.10.45 PM.jpeg"
-                alt="Niñas y niños trabajando en huerto escolar"
-                class="who-photo"
-                loading="lazy"
-                decoding="async"
-                sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 100vw"
-                width="1600"
-                height="1200"
-              />
-            </figure>
-
-            <figure class="who-photo-card">
-              <img
-                src="WhatsApp Image 2026-02-08 at 2.20.03 PM.jpeg"
-                alt="Familias y comunidad participando en actividad al aire libre"
-                class="who-photo"
-                loading="lazy"
-                decoding="async"
-                sizes="(min-width: 1024px) 31vw, (min-width: 640px) 46vw, 100vw"
-                width="1280"
-                height="960"
-              />
-            </figure>
-
-            <aside class="who-mascot-card" aria-label="Logo secundario de mascota">
-              <p class="who-mascot-kicker">Logo secundario</p>
-              <div class="who-mascot-list">
-                <button
-                  class="who-mascot-btn mascot-interactive"
-                  type="button"
-                  aria-label="Mascota secundaria Reggio Emilia uno"
-                  aria-expanded="false"
-                  aria-controls="mascot-tip-1"
-                >
-                  <img
-                    src="mascota 1"
-                    alt="Mascota secundaria de Reggio Emilia versión uno"
-                    class="who-mascot-image"
-                    loading="lazy"
-                    decoding="async"
-                    sizes="(min-width: 1024px) 38vw, 100vw"
-                    width="1600"
-                    height="589"
-                  />
-                  <span id="mascot-tip-1" class="who-tooltip" role="status" aria-live="polite">Explora nuestros ambientes de aprendizaje.</span>
-                </button>
-
-                <button
-                  class="who-mascot-btn mascot-interactive"
-                  type="button"
-                  aria-label="Mascota secundaria Reggio Emilia dos"
-                  aria-expanded="false"
-                  aria-controls="mascot-tip-2"
-                >
-                  <img
-                    src="mascota 2"
-                    alt="Mascota secundaria de Reggio Emilia versión dos"
-                    class="who-mascot-image"
-                    loading="lazy"
-                    decoding="async"
-                    sizes="(min-width: 1024px) 38vw, 100vw"
-                    width="1280"
-                    height="471"
-                  />
-                  <span id="mascot-tip-2" class="who-tooltip" role="status" aria-live="polite">Descubre nuestra propuesta y agenda una visita.</span>
-                </button>
+          <div class="who-story-grid">
+            <article class="who-story-row bento-card" data-animate>
+              <figure class="who-story-media">
+                <img
+                  src="WhatsApp Image 2026-02-08 at 2.09.30 PM.jpeg"
+                  alt="Niñas y niños explorando dibujo en aula"
+                  class="who-photo"
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 1024px) 42vw, 100vw"
+                  width="1600"
+                  height="1204"
+                />
+              </figure>
+              <div class="who-story-copy">
+                <h3>Cien lenguajes para descubrir</h3>
+                <p>
+                  Cada ambiente está diseñado para que niñas y niños investiguen con sus manos, observen, pregunten y
+                  encuentren distintas formas de expresarse.
+                </p>
               </div>
-            </aside>
+            </article>
+
+            <article class="who-story-row bento-card" data-animate>
+              <figure class="who-story-media">
+                <img
+                  src="WhatsApp Image 2026-02-08 at 2.10.45 PM.jpeg"
+                  alt="Niñas y niños trabajando en huerto escolar"
+                  class="who-photo"
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 1024px) 42vw, 100vw"
+                  width="1600"
+                  height="1200"
+                />
+              </figure>
+              <div class="who-story-copy">
+                <h3>Protagonismo infantil en la práctica</h3>
+                <p>
+                  Acompañamos procesos auténticos donde el niño es protagonista y el adulto guía con escucha, intención
+                  pedagógica y respeto por el ritmo de cada etapa.
+                </p>
+              </div>
+            </article>
+
+            <article class="who-story-row bento-card" data-animate>
+              <figure class="who-story-media">
+                <img
+                  src="WhatsApp Image 2026-02-08 at 2.20.03 PM.jpeg"
+                  alt="Familias y comunidad participando en actividad al aire libre"
+                  class="who-photo"
+                  loading="lazy"
+                  decoding="async"
+                  sizes="(min-width: 1024px) 42vw, 100vw"
+                  width="1280"
+                  height="960"
+                />
+              </figure>
+              <div class="who-story-copy">
+                <h3>Aprendizaje que se construye en comunidad</h3>
+                <p>
+                  La relación escuela-familia fortalece cada experiencia y da sentido a un recorrido educativo cercano,
+                  coherente y profundamente humano.
+                </p>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -405,32 +368,31 @@
       <section id="filosofia" class="section philosophy-section">
         <div id="oferta" aria-hidden="true"></div>
         <div class="container">
-          <article class="philosophy-card bento-card" data-animate>
-            <p class="text-sm font-semibold uppercase tracking-wide text-reggio-red">2. Para la Página Web (La Propuesta de Valor Estratégica)</p>
-            <h2 class="text-4xl font-bold text-reggio-blue md:text-5xl">Nuestra filosofía</h2>
-            <p><strong>Título:</strong> Más que un colegio, un Atelier de vida.</p>
-            <div class="philosophy-highlight-row" aria-label="Conceptos clave">
-              <span class="badge">Atelier de vida</span>
-              <span class="badge">Co-construcción</span>
-              <span class="badge">Potencial infinito</span>
-            </div>
-            <div class="philosophy-accordion" data-accordion>
-              <details class="accordion-item" open>
-                <summary>Primera infancia</summary>
-                <p>En Reggio entendemos que la primera infancia es la etapa más poderosa del ser humano.</p>
-              </details>
-              <details class="accordion-item">
-                <summary>Experiencia educativa</summary>
-                <p>Inspirados en esta pedagogía, transformamos la educación tradicional en una experiencia de co-construcción.</p>
-              </details>
-              <details class="accordion-item">
-                <summary>Niño protagonista</summary>
-                <ul>
-                  <li>En donde el Niño es el Protagonista y poseedor de un potencial infinito, listo para ser detonado no sólo por sus maestros, sino por el ambiente que provoca e invita a la exploración profunda.</li>
-                </ul>
-              </details>
-            </div>
-          </article>
+          <div class="section-header philosophy-header" data-animate>
+            <p class="text-sm font-semibold uppercase tracking-wide text-reggio-red">Nuestra filosofía</p>
+            <h2 class="text-4xl font-bold text-reggio-blue md:text-5xl">Más que un colegio, un Atelier de vida.</h2>
+          </div>
+          <div class="philosophy-grid" data-animate>
+            <article class="philosophy-item bento-card">
+              <h3>Primera infancia</h3>
+              <p>En Reggio entendemos que la primera infancia es la etapa más poderosa del ser humano.</p>
+            </article>
+            <article class="philosophy-item bento-card">
+              <h3>Co-construcción</h3>
+              <p>Inspirados en esta pedagogía, transformamos la educación tradicional en una experiencia de co-construcción.</p>
+            </article>
+            <article class="philosophy-item bento-card">
+              <h3>Niño protagonista</h3>
+              <ul>
+                <li>En donde el Niño es el Protagonista y poseedor de un potencial infinito, listo para ser detonado no sólo por sus maestros, sino por el ambiente que provoca e invita a la exploración profunda.</li>
+              </ul>
+            </article>
+          </div>
+          <div class="philosophy-highlight-row" aria-label="Conceptos clave" data-animate>
+            <span class="badge">Atelier de vida</span>
+            <span class="badge">Co-construcción</span>
+            <span class="badge">Potencial infinito</span>
+          </div>
         </div>
       </section>
 
@@ -438,34 +400,52 @@
         <div class="container">
           <article class="contact-card bento-card" data-animate>
             <h2 class="text-4xl font-bold text-reggio-blue md:text-5xl">Contacto</h2>
-            <p><strong>DATOS GENERALES:</strong></p>
-            <p><strong>DIRECCIÓN:</strong> CORREGIDORA JOSEFA ORTIZ DE DOMÍNGUEZ NO. 65, COL. LOS ÁNGELES C.P. 91060, XALAPA, VER.</p>
-            <p><strong>TEL:</strong> <a class="contact-phone-link" href="tel:5655473159">5655473159</a></p>
-            <p><strong>CLAVES DE INCORPORACIÓN:</strong></p>
-            <ul class="contact-list">
-              <li><strong>INICIAL:</strong> 30PDI0145E</li>
-              <li><strong>PREESCOLAR:</strong> 30PJN1020Z</li>
-            </ul>
-            <p><strong>ANTIGÜEDAD:</strong> 12 AÑOS</p>
-            <div class="contact-social" aria-label="Redes sociales">
-              <a
-                class="social-link social-link-text"
-                href="https://www.instagram.com/comunidadreggioemilia/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-              >
-                Instagram
-              </a>
-              <a
-                class="social-link social-link-text"
-                href="https://www.facebook.com/ComunidadEducativaReggioEmilia/?locale=es_LA"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-              >
-                Facebook
-              </a>
+            <div class="contact-layout">
+              <div class="contact-info">
+                <p><strong>Dirección:</strong> Corregidora # 65, Ensueño, 91060 Xalapa-Enríquez, Ver.</p>
+                <p><strong>Tel:</strong> <a class="contact-phone-link" href="tel:5655473159">5655473159</a></p>
+                <div class="contact-actions">
+                  <a class="btn-bounce inline-flex rounded-full bg-reggio-blue px-5 py-3 text-sm font-semibold text-white shadow-glow" href="tel:5655473159">
+                    Llamar ahora
+                  </a>
+                  <a
+                    class="btn-bounce inline-flex rounded-full border border-reggio-green/60 px-5 py-3 text-sm font-semibold text-reggio-green"
+                    href="https://wa.me/525655473159?text=Hola%2C%20me%20gustar%C3%ADa%20recibir%20informaci%C3%B3n%20sobre%20inscripciones%20en%20Comunidad%20Educativa%20Reggio%20Emilia."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    WhatsApp directo
+                  </a>
+                </div>
+                <div class="contact-social" aria-label="Redes sociales">
+                  <a
+                    class="social-link social-link-text"
+                    href="https://www.instagram.com/comunidadreggioemilia/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                  >
+                    Instagram
+                  </a>
+                  <a
+                    class="social-link social-link-text"
+                    href="https://www.facebook.com/ComunidadEducativaReggioEmilia/?locale=es_LA"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
+                  >
+                    Facebook
+                  </a>
+                </div>
+              </div>
+              <div class="contact-map-wrap">
+                <iframe
+                  title="Mapa de Comunidad Educativa Reggio Emilia"
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  src="https://www.google.com/maps?q=Corregidora%20%23%2065%2C%20Ensue%C3%B1o%2C%2091060%20Xalapa-Enr%C3%ADquez%2C%20Ver.&output=embed"
+                ></iframe>
+              </div>
             </div>
           </article>
         </div>
@@ -475,13 +455,23 @@
         <div class="container">
           <article class="enrollment-card bento-card" data-animate>
             <h2 class="text-4xl font-bold text-reggio-blue md:text-5xl">Inscripciones</h2>
-            <p>Botón de Llamado a la Acción (CTA): [Explora nuestra propuesta pedagógica - Agenda una entrevista aquí]</p>
-            <a
-              class="btn-bounce inline-flex rounded-full bg-reggio-blue px-6 py-3 text-sm font-semibold text-white shadow-glow"
-              href="#contacto"
-            >
-              Explora nuestra propuesta pedagógica - Agenda una entrevista aquí
-            </a>
+            <p>Explora nuestra propuesta pedagógica y agenda una entrevista para conocer nuestros espacios.</p>
+            <div class="enrollment-actions">
+              <a
+                class="btn-bounce inline-flex rounded-full bg-reggio-blue px-6 py-3 text-sm font-semibold text-white shadow-glow"
+                href="#contacto"
+              >
+                Explora nuestra propuesta pedagógica - Agenda una entrevista aquí
+              </a>
+              <a
+                class="btn-bounce inline-flex rounded-full border border-reggio-blue/50 px-6 py-3 text-sm font-semibold text-reggio-blue"
+                href="https://wa.me/525655473159?text=Hola%2C%20quiero%20agendar%20una%20entrevista%20para%20inscripciones."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Iniciar por WhatsApp
+              </a>
+            </div>
           </article>
         </div>
       </section>
