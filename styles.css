@@ -242,6 +242,12 @@ img {
   text-align: center;
 }
 
+.hero-logo-large {
+  width: min(100%, 640px);
+  height: auto;
+  object-fit: contain;
+}
+
 .hero-mascot {
   --mouse-x: 0px;
   --mouse-y: 0px;
@@ -294,9 +300,13 @@ img {
 }
 
 .who-intro-mascot {
-  width: min(100%, 320px);
+  width: min(100%, 560px);
   height: auto;
-  object-fit: contain;
+  aspect-ratio: 1696 / 608;
+  object-fit: cover;
+  border-radius: 18px;
+  border: 1px solid rgba(1, 103, 177, 0.18);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.1);
   margin-inline: auto;
 }
 
@@ -382,7 +392,7 @@ img {
 
 @media (min-width: 900px) {
   .who-intro {
-    grid-template-columns: 0.75fr 1.25fr;
+    grid-template-columns: 1fr 1.1fr;
   }
 
   .who-intro-mascot {
