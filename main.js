@@ -1,146 +1,147 @@
-const menuToggle = document.querySelector('.menu-toggle');
-const primaryNav = document.querySelector('.primary-nav');
-const yearEl = document.getElementById('year');
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-if (yearEl) {
-  yearEl.textContent = new Date().getFullYear();
-}
-
-if (menuToggle && primaryNav) {
-  menuToggle.addEventListener('click', () => {
-    const isOpen = primaryNav.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
-
-  primaryNav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      primaryNav.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-}
-
-const cursor = document.querySelector('.custom-cursor');
-if (cursor && prefersReducedMotion) {
-  cursor.style.display = 'none';
-}
-
-if (cursor && !prefersReducedMotion) {
-  window.addEventListener('mousemove', (event) => {
-    cursor.style.left = `${event.clientX}px`;
-    cursor.style.top = `${event.clientY}px`;
-  });
-
-  const interactiveTargets = document.querySelectorAll('a, button, .cursor-fun');
-  interactiveTargets.forEach((target) => {
-    target.addEventListener('mouseenter', () => cursor.classList.add('is-active'));
-    target.addEventListener('mouseleave', () => cursor.classList.remove('is-active'));
-  });
-}
-
-const confettiColors = ['#0167b1', '#e30119', '#83b410', '#fcc302'];
-const createConfetti = (x, y) => {
-  if (prefersReducedMotion) {
+const setupMenu = () => {
+  const menuToggle = document.querySelector(".menu-toggle");
+  const primaryNav = document.querySelector(".primary-nav");
+  if (!menuToggle || !primaryNav) {
     return;
   }
-  for (let i = 0; i < 10; i += 1) {
-    const confetti = document.createElement('span');
-    confetti.className = 'confetti';
-    confetti.style.left = `${x}px`;
-    confetti.style.top = `${y}px`;
-    confetti.style.background = confettiColors[i % confettiColors.length];
-    confetti.style.setProperty('--x', `${(Math.random() - 0.5) * 160}px`);
-    confetti.style.setProperty('--y', `${80 + Math.random() * 140}px`);
-    document.body.appendChild(confetti);
 
-    confetti.addEventListener('animationend', () => confetti.remove());
-  }
-};
-
-const confettiTriggers = document.querySelectorAll('.confetti-trigger, .cursor-fun');
-confettiTriggers.forEach((trigger) => {
-  trigger.addEventListener('click', (event) => {
-    createConfetti(event.clientX, event.clientY);
-  });
-  trigger.addEventListener('mouseenter', (event) => {
-    if (window.innerWidth >= 768) {
-      createConfetti(event.clientX, event.clientY);
-    }
-  });
-});
-
-const revealElements = document.querySelectorAll('[data-animate]');
-const parallaxItems = document.querySelectorAll('.parallax');
-
-if (window.gsap && window.ScrollTrigger) {
-  window.gsap.registerPlugin(window.ScrollTrigger);
-
-  window.gsap.from('.hero-title', {
-    opacity: 0,
-    y: 20,
-    duration: 1,
-    ease: 'power3.out'
+  menuToggle.addEventListener("click", () => {
+    const isOpen = primaryNav.classList.toggle("open");
+    menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
   });
 
-  window.gsap.from('.hero-logo', {
-    opacity: 0,
-    scale: 0.8,
-    duration: 1.2,
-    ease: 'power3.out',
-    delay: 0.2
-  });
-
-  revealElements.forEach((element) => {
-    window.gsap.fromTo(
-      element,
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: element,
-          start: 'top 80%'
-        }
-      }
-    );
-  });
-
-  parallaxItems.forEach((item, index) => {
-    window.gsap.to(item, {
-      y: (index + 1) * 24,
-      scrollTrigger: {
-        trigger: item.closest('section') || item,
-        start: 'top bottom',
-        scrub: true
-      }
+  primaryNav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      primaryNav.classList.remove("open");
+      menuToggle.setAttribute("aria-expanded", "false");
     });
   });
-} else if (revealElements.length > 0 && 'IntersectionObserver' in window) {
+};
+
+const animateOnScroll = () => {
+  const animatedElements = document.querySelectorAll("[data-animate]");
+  if (animatedElements.length === 0) {
+    return;
+  }
+
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    animatedElements.forEach((element) => element.classList.add("is-visible"));
+    return;
+  }
+
+  document.body.classList.add("motion-ready");
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
+        if (!entry.isIntersecting) {
+          return;
         }
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
       });
     },
-    {
-      threshold: 0.2
-    }
+    { threshold: 0.16, rootMargin: "0px 0px -30px 0px" }
   );
 
-  revealElements.forEach((el) => {
-    el.classList.add('reveal');
-    observer.observe(el);
-  });
-} else {
-  revealElements.forEach((el) => el.classList.add('is-visible'));
-}
+  animatedElements.forEach((element) => observer.observe(element));
+};
 
-if (window.lucide) {
-  window.lucide.createIcons();
-}
+const setupWhoMascotInteractions = () => {
+  const mascotStage = document.querySelector("[data-mascot-stage]");
+  if (!mascotStage) {
+    return;
+  }
+
+  const mascotButton = mascotStage.querySelector(".who-mascot-3d-wrap");
+  const reactionTriggers = document.querySelectorAll(".keyword-trigger[data-mascot-reaction]");
+  if (!mascotButton) {
+    return;
+  }
+
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  let frameId = 0;
+  let jumpTimeoutId = 0;
+
+  const setTilt = (xDeg, yDeg) => {
+    if (prefersReducedMotion) {
+      return;
+    }
+    if (frameId) {
+      cancelAnimationFrame(frameId);
+    }
+    frameId = requestAnimationFrame(() => {
+      mascotStage.style.setProperty("--tilt-x", `${xDeg.toFixed(2)}deg`);
+      mascotStage.style.setProperty("--tilt-y", `${yDeg.toFixed(2)}deg`);
+    });
+  };
+
+  const resetTilt = () => {
+    mascotStage.style.setProperty("--tilt-x", "0deg");
+    mascotStage.style.setProperty("--tilt-y", "0deg");
+  };
+
+  if (canHover) {
+    mascotButton.addEventListener("pointermove", (event) => {
+      const rect = mascotButton.getBoundingClientRect();
+      const xRatio = (event.clientX - rect.left) / rect.width - 0.5;
+      const yRatio = (event.clientY - rect.top) / rect.height - 0.5;
+      setTilt(-yRatio * 9, xRatio * 12);
+    });
+
+    mascotButton.addEventListener("pointerleave", resetTilt);
+    mascotButton.addEventListener("pointercancel", resetTilt);
+  }
+
+  mascotButton.addEventListener("click", () => {
+    if (prefersReducedMotion) {
+      return;
+    }
+    mascotStage.classList.remove("is-jumping");
+    void mascotStage.offsetWidth;
+    mascotStage.classList.add("is-jumping");
+    clearTimeout(jumpTimeoutId);
+    jumpTimeoutId = window.setTimeout(() => {
+      mascotStage.classList.remove("is-jumping");
+    }, 560);
+  });
+
+  reactionTriggers.forEach((trigger) => {
+    const reaction = trigger.dataset.mascotReaction;
+    let mobileReactionTimeout = 0;
+
+    const activate = () => {
+      if (reaction === "vigilancia") {
+        mascotStage.classList.add("is-vigilant");
+      }
+      if (reaction === "naturaleza") {
+        mascotStage.classList.add("is-nature");
+      }
+    };
+
+    const deactivate = () => {
+      if (reaction === "vigilancia") {
+        mascotStage.classList.remove("is-vigilant");
+      }
+      if (reaction === "naturaleza") {
+        mascotStage.classList.remove("is-nature");
+      }
+    };
+
+    trigger.addEventListener("mouseenter", activate);
+    trigger.addEventListener("mouseleave", deactivate);
+    trigger.addEventListener("focus", activate);
+    trigger.addEventListener("blur", deactivate);
+    trigger.addEventListener("click", () => {
+      activate();
+      clearTimeout(mobileReactionTimeout);
+      mobileReactionTimeout = window.setTimeout(deactivate, 850);
+    });
+  });
+};
+
+setupMenu();
+animateOnScroll();
+setupWhoMascotInteractions();
