@@ -24,8 +24,11 @@
   --clay:   #c4614a;
 
   /* Typography */
-  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --font-body:    'Nunito', 'Segoe UI', system-ui, sans-serif;
+  --font-titulo: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  --font-cuerpo: 'Lato', 'Segoe UI', system-ui, sans-serif;
+  /* Legacy alias kept for internal references */
+  --font-display: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  --font-body:    'Lato', 'Segoe UI', system-ui, sans-serif;
 
   /* Spacing scale */
   --section-y: clamp(72px, 10vw, 120px);
@@ -63,11 +66,31 @@ html {
 
 body {
   margin: 0;
-  font-family: var(--font-body);
+  font-family: var(--font-cuerpo);
   color: var(--black);
   background: #fff;
-  line-height: 1.65;
+  line-height: 1.75;
   -webkit-font-smoothing: antialiased;
+}
+
+p, li { font-family: var(--font-cuerpo); font-weight: 400; line-height: 1.75; }
+
+h1 {
+  font-family: var(--font-titulo);
+  font-weight: 900;
+  letter-spacing: -0.5px;
+}
+h2 {
+  font-family: var(--font-titulo);
+  font-weight: 800;
+}
+h3 {
+  font-family: var(--font-titulo);
+  font-weight: 700;
+}
+h4 {
+  font-family: var(--font-titulo);
+  font-weight: 700;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -143,9 +166,9 @@ select:focus-visible {
 .eyebrow--blue   { color: var(--blue); }
 
 .section-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 3.25rem);
-  font-weight: 700;
+  font-family: var(--font-titulo);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 800;
   color: var(--blue);
   margin-bottom: 1rem;
 }
@@ -174,7 +197,7 @@ select:focus-visible {
   align-items: center;
   gap: .5rem;
   border-radius: var(--radius-pill);
-  font-family: var(--font-body);
+  font-family: var(--font-titulo);
   font-size: .9rem;
   font-weight: 700;
   line-height: 1;
@@ -290,6 +313,7 @@ select:focus-visible {
 }
 
 .nav-link {
+  font-family: var(--font-titulo);
   font-size: .875rem;
   font-weight: 600;
   color: var(--gray);
@@ -420,12 +444,12 @@ select:focus-visible {
 }
 
 .hero-title {
-  font-family: var(--font-display);
-  font-size: clamp(2.2rem, 5.5vw, 3.5rem);
-  font-weight: 800;
+  font-family: var(--font-titulo);
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 900;
   color: var(--blue);
   line-height: 1.1;
-  letter-spacing: -.01em;
+  letter-spacing: -.5px;
 }
 
 .hero-lead {
@@ -490,7 +514,7 @@ select:focus-visible {
 
 .hero-card-header { display: grid; gap: .6rem; }
 .hero-card-title {
-  font-family: var(--font-display);
+  font-family: var(--font-titulo);
   font-size: clamp(1.2rem, 2.5vw, 1.6rem);
   color: var(--black);
   font-weight: 700;
@@ -520,6 +544,12 @@ select:focus-visible {
   gap: .5rem;
 }
 
+/* Variante de dos columnas cuando el chip "0-12" fue eliminado */
+.hero-stats--two {
+  grid-template-columns: repeat(2, 1fr);
+  max-width: 320px;
+}
+
 .stat-chip {
   text-align: center;
   background: var(--cream);
@@ -529,9 +559,9 @@ select:focus-visible {
 }
 .stat-number {
   display: block;
-  font-family: var(--font-display);
+  font-family: var(--font-titulo);
   font-size: 1.5rem;
-  font-weight: 800;
+  font-weight: 900;
   color: var(--blue);
   line-height: 1;
   margin-bottom: .2rem;
@@ -556,6 +586,102 @@ select:focus-visible {
   width: min(100%, 480px);
   height: auto;
   object-fit: contain;
+}
+
+/* === MASCOTAS === */
+
+/* Logo protagonista en hero — aparece antes del H1 */
+.hero-logo-wrap {
+  padding-block: 80px 60px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.hero-logo-protagonist {
+  width: clamp(260px, 85vw, 560px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0px 8px 24px rgba(180, 120, 60, 0.18));
+  transition: transform 0.4s ease;
+  animation: logoEntrada 1s ease forwards;
+}
+
+.hero-logo-protagonist:hover {
+  transform: scale(1.03);
+}
+
+@keyframes logoEntrada {
+  from { opacity: 0; transform: translateY(-16px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+@media (min-width: 1024px) {
+  .hero-logo-protagonist { width: clamp(440px, 40vw, 600px); }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero-logo-protagonist { width: clamp(320px, 55vw, 500px); }
+}
+
+/* Mascota 1 — esquina inferior derecha del hero */
+.hero-mascota-1 {
+  position: absolute;
+  bottom: -20px;
+  right: 5%;
+  width: clamp(100px, 15vw, 220px);
+  height: auto;
+  object-fit: contain;
+  z-index: 2;
+  pointer-events: none;
+  animation: flotar 4s ease-in-out infinite;
+}
+
+@keyframes flotar {
+  0%, 100% { transform: translateY(0px) rotate(-1deg); }
+  50%       { transform: translateY(-10px) rotate(1deg); }
+}
+
+@media (max-width: 480px) {
+  .hero-mascota-1 {
+    width: clamp(80px, 25vw, 120px);
+    bottom: -10px;
+    right: 2%;
+  }
+}
+
+/* Divisor con Mascota 2 — entre Quiénes Somos y Filosofía */
+.divisor-mascota {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 3rem auto;
+  max-width: 700px;
+  padding: 0 2rem;
+}
+
+.linea-decorativa {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c8956c, transparent);
+  border-radius: 2px;
+}
+
+.mascota-divisor {
+  width: clamp(80px, 10vw, 140px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+  animation: girar-leve 5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes girar-leve {
+  0%, 100% { transform: rotate(-3deg); }
+  50%       { transform: rotate(3deg); }
+}
+
+@media (max-width: 480px) {
+  .mascota-divisor { width: clamp(60px, 18vw, 90px); }
+  .divisor-mascota { gap: 1rem; margin: 2rem auto; }
 }
 
 /* ── 9. Who We Are ───────────────────────────────────────── */
@@ -584,17 +710,7 @@ select:focus-visible {
   .who-intro-copy { padding-right: 1rem; }
 }
 
-.who-mascot-watermark {
-  position: absolute;
-  top: 14px;
-  left: 20px;
-  width: min(50%, 280px);
-  height: auto;
-  opacity: .28;
-  pointer-events: none;
-  transform: rotate(-7deg);
-  z-index: 0;
-}
+/* who-mascot-watermark eliminada — elemento removido del HTML */
 
 .who-intro-copy {
   position: relative;
@@ -604,10 +720,10 @@ select:focus-visible {
 }
 
 .who-title-serif {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-family: var(--font-titulo);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
   color: var(--blue);
-  font-weight: 700;
+  font-weight: 800;
   line-height: 1.1;
   margin: 0;
 }
@@ -765,7 +881,7 @@ select:focus-visible {
 .who-story-row:hover .who-photo { transform: scale(1.03); }
 
 .who-story-copy { display: grid; align-content: center; gap: .625rem; padding: .5rem; }
-.who-story-copy h3 { font-family: var(--font-display); color: var(--blue); font-size: 1.35rem; font-weight: 700; }
+.who-story-copy h3 { font-family: var(--font-titulo); color: var(--blue); font-size: 1.35rem; font-weight: 700; }
 .who-story-copy p  { color: var(--gray); font-size: .95rem; line-height: 1.7; }
 
 /* ── 10. Philosophy ──────────────────────────────────────── */
@@ -794,7 +910,7 @@ select:focus-visible {
 .philosophy-icon svg { width: 100%; height: 100%; }
 
 .philosophy-item h3 {
-  font-family: var(--font-display);
+  font-family: var(--font-titulo);
   color: var(--blue);
   font-size: 1.15rem;
   font-weight: 700;
@@ -888,9 +1004,9 @@ select:focus-visible {
 .proof-item { text-align: center; }
 .proof-number {
   display: block;
-  font-family: var(--font-display);
+  font-family: var(--font-titulo);
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 900;
   color: var(--blue);
   line-height: 1;
   margin-bottom: .3rem;
@@ -1188,7 +1304,7 @@ select:focus-visible {
 /* Form */
 .contact-form-wrap { padding: 2rem; }
 .contact-form-title {
-  font-family: var(--font-display);
+  font-family: var(--font-titulo);
   font-size: 1.35rem;
   color: var(--blue);
   font-weight: 700;
@@ -1258,7 +1374,7 @@ select:focus-visible {
 .contact-info-wrap { display: grid; gap: 1.25rem; }
 .contact-info { padding: 1.75rem; }
 .contact-info-title {
-  font-family: var(--font-display);
+  font-family: var(--font-titulo);
   font-size: 1.35rem;
   color: var(--blue);
   font-weight: 700;
@@ -1544,8 +1660,11 @@ body.motion-ready [data-animate].is-visible > *:nth-child(3) { transition-delay:
     transform: none !important;
   }
 
-  .lightbox-img { animation: none !important; }
-  .hero-badge   { animation: none !important; }
+  .lightbox-img        { animation: none !important; }
+  .hero-badge          { animation: none !important; }
+  .hero-logo-protagonist { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .hero-mascota-1      { animation: none !important; }
+  .mascota-divisor     { animation: none !important; }
 }
 
 /* ── 23. Dark Mode ───────────────────────────────────────── */
@@ -1602,6 +1721,7 @@ body.motion-ready [data-animate].is-visible > *:nth-child(3) { transition-delay:
   .contact-section { background: linear-gradient(180deg, #111, #1a1814); }
 
   .stat-chip, .proof-row { background: #1a1814; border-color: rgba(255,255,255,.08); }
+  .divisor-mascota .linea-decorativa { background: linear-gradient(90deg, transparent, rgba(200,149,108,.4), transparent); }
   .who-intro { background: rgba(26,24,20,.96); }
   .author-name { color: var(--black); }
   .testimonial-text { color: var(--black); }
