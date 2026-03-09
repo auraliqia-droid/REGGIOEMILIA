@@ -69,7 +69,16 @@ const setupScrollAnimations = () => {
     { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
   );
 
-  elements.forEach(el => observer.observe(el));
+  // Pre-mark elements already in viewport so they never flash invisible
+  const vh = window.innerHeight;
+  elements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < vh && rect.bottom > 0) {
+      el.classList.add("is-visible");
+    } else {
+      observer.observe(el);
+    }
+  });
 };
 
 /* ── 4. Mascot interactions ─────────────────────────────────── */
@@ -85,6 +94,7 @@ const setupMascot = () => {
   let rafId = 0;
   let jumpTimer = 0;
 
+  /* ── Tilt (parallax 3D) ─── */
   const setTilt = (x, y) => {
     if (prefersReducedMotion) return;
     cancelAnimationFrame(rafId);
@@ -110,15 +120,69 @@ const setupMascot = () => {
     btn.addEventListener("pointercancel", resetTilt);
   }
 
+  /* ── Speech bubble ─── */
+  const bubble     = qs("#mascot-speech");
+  const bubbleText = qs("#mascot-speech-text");
+  const phrases = [
+    "¡Hola! Soy el Gallo de Reggio",
+    "¿Listo para explorar?",
+    "¡Aquí aprendemos jugando!",
+    "¡La curiosidad es mi superpoder!",
+    "¡Ven a conocer la comunidad!",
+  ];
+  let phraseIndex = 0;
+  let bubbleTimer  = 0;
+  let isHovered    = false;
+
+  const showBubble = () => {
+    if (!bubble || !bubbleText || prefersReducedMotion) return;
+    bubbleText.textContent = phrases[phraseIndex % phrases.length];
+    phraseIndex++;
+    bubble.classList.add("is-visible");
+  };
+
+  const hideBubble = () => {
+    if (!bubble) return;
+    bubble.classList.remove("is-visible");
+  };
+
+  if (canHover) {
+    btn.addEventListener("mouseenter", () => {
+      isHovered = true;
+      showBubble();
+    });
+    btn.addEventListener("mouseleave", () => {
+      isHovered = false;
+      hideBubble();
+    });
+  }
+
   btn.addEventListener("click", () => {
-    if (prefersReducedMotion) return;
-    stage.classList.remove("is-jumping");
-    void stage.offsetWidth; // reflow to restart animation
-    stage.classList.add("is-jumping");
-    clearTimeout(jumpTimer);
-    jumpTimer = setTimeout(() => stage.classList.remove("is-jumping"), 560);
+    /* Jump */
+    if (!prefersReducedMotion) {
+      stage.classList.remove("is-jumping");
+      void stage.offsetWidth;
+      stage.classList.add("is-jumping");
+      clearTimeout(jumpTimer);
+      jumpTimer = setTimeout(() => stage.classList.remove("is-jumping"), 560);
+    }
+
+    /* On touch / click always show bubble briefly */
+    showBubble();
+    clearTimeout(bubbleTimer);
+    bubbleTimer = setTimeout(() => {
+      if (!isHovered) hideBubble();
+    }, 2400);
   });
 
+  /* Rotate phrase every 6 s while hovered (desktop) */
+  if (canHover) {
+    setInterval(() => {
+      if (isHovered) showBubble();
+    }, 6000);
+  }
+
+  /* ── Keyword triggers ─── */
   triggers.forEach(trigger => {
     const reaction = trigger.dataset.mascotReaction;
     let mobileTimer = 0;
@@ -221,7 +285,7 @@ const setupFAQ = () => {
     const answer  = qs(".faq-answer", details);
     if (!summary || !answer) return;
 
-    summary.addEventListener("click", e => {
+    summary.addEventListener("click", () => {
       // Close others (accordion behavior)
       items.forEach(other => {
         if (other !== details && other.open) {
@@ -379,9 +443,7 @@ const setupActiveNav = () => {
         if (!entry.isIntersecting) return;
         const id = entry.target.id;
         navLinks.forEach(link => {
-          const isActive = link.getAttribute("href") === `#${id}`;
-          link.style.color    = isActive ? "var(--blue)" : "";
-          link.style.fontWeight = isActive ? "800" : "";
+          link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
         });
       });
     },
