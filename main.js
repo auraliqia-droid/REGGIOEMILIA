@@ -1,146 +1,490 @@
-const menuToggle = document.querySelector('.menu-toggle');
-const primaryNav = document.querySelector('.primary-nav');
-const yearEl = document.getElementById('year');
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/**
+ * Comunidad Educativa Reggio Emilia — main.js
+ * Vanilla JS: menu, scroll animations, mascot, lightbox, FAQ, form validation
+ */
 
-if (yearEl) {
-  yearEl.textContent = new Date().getFullYear();
-}
+"use strict";
 
-if (menuToggle && primaryNav) {
-  menuToggle.addEventListener('click', () => {
-    const isOpen = primaryNav.classList.toggle('open');
-    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  });
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  primaryNav.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', () => {
-      primaryNav.classList.remove('open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-    });
-  });
-}
+/* ── Utilities ─────────────────────────────────────────────── */
+const qs  = (sel, ctx = document) => ctx.querySelector(sel);
+const qsa = (sel, ctx = document) => [...ctx.querySelectorAll(sel)];
 
-const cursor = document.querySelector('.custom-cursor');
-if (cursor && prefersReducedMotion) {
-  cursor.style.display = 'none';
-}
+/* ── 1. Mobile Menu ─────────────────────────────────────────── */
+const setupMenu = () => {
+  const toggle = qs(".menu-toggle");
+  const nav    = qs(".primary-nav");
+  if (!toggle || !nav) return;
 
-if (cursor && !prefersReducedMotion) {
-  window.addEventListener('mousemove', (event) => {
-    cursor.style.left = `${event.clientX}px`;
-    cursor.style.top = `${event.clientY}px`;
-  });
+  const open  = () => { nav.classList.add("open"); toggle.classList.add("open"); toggle.setAttribute("aria-expanded", "true"); };
+  const close = () => { nav.classList.remove("open"); toggle.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); };
 
-  const interactiveTargets = document.querySelectorAll('a, button, .cursor-fun');
-  interactiveTargets.forEach((target) => {
-    target.addEventListener('mouseenter', () => cursor.classList.add('is-active'));
-    target.addEventListener('mouseleave', () => cursor.classList.remove('is-active'));
-  });
-}
-
-const confettiColors = ['#0167b1', '#e30119', '#83b410', '#fcc302'];
-const createConfetti = (x, y) => {
-  if (prefersReducedMotion) {
-    return;
-  }
-  for (let i = 0; i < 10; i += 1) {
-    const confetti = document.createElement('span');
-    confetti.className = 'confetti';
-    confetti.style.left = `${x}px`;
-    confetti.style.top = `${y}px`;
-    confetti.style.background = confettiColors[i % confettiColors.length];
-    confetti.style.setProperty('--x', `${(Math.random() - 0.5) * 160}px`);
-    confetti.style.setProperty('--y', `${80 + Math.random() * 140}px`);
-    document.body.appendChild(confetti);
-
-    confetti.addEventListener('animationend', () => confetti.remove());
-  }
-};
-
-const confettiTriggers = document.querySelectorAll('.confetti-trigger, .cursor-fun');
-confettiTriggers.forEach((trigger) => {
-  trigger.addEventListener('click', (event) => {
-    createConfetti(event.clientX, event.clientY);
-  });
-  trigger.addEventListener('mouseenter', (event) => {
-    if (window.innerWidth >= 768) {
-      createConfetti(event.clientX, event.clientY);
-    }
-  });
-});
-
-const revealElements = document.querySelectorAll('[data-animate]');
-const parallaxItems = document.querySelectorAll('.parallax');
-
-if (window.gsap && window.ScrollTrigger) {
-  window.gsap.registerPlugin(window.ScrollTrigger);
-
-  window.gsap.from('.hero-title', {
-    opacity: 0,
-    y: 20,
-    duration: 1,
-    ease: 'power3.out'
-  });
-
-  window.gsap.from('.hero-logo', {
-    opacity: 0,
-    scale: 0.8,
-    duration: 1.2,
-    ease: 'power3.out',
-    delay: 0.2
-  });
-
-  revealElements.forEach((element) => {
-    window.gsap.fromTo(
-      element,
-      { opacity: 0, y: 20 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: element,
-          start: 'top 80%'
-        }
-      }
-    );
-  });
-
-  parallaxItems.forEach((item, index) => {
-    window.gsap.to(item, {
-      y: (index + 1) * 24,
-      scrollTrigger: {
-        trigger: item.closest('section') || item,
-        start: 'top bottom',
-        scrub: true
-      }
-    });
-  });
-} else if (revealElements.length > 0 && 'IntersectionObserver' in window) {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.2
-    }
+  toggle.addEventListener("click", () =>
+    nav.classList.contains("open") ? close() : open()
   );
 
-  revealElements.forEach((el) => {
-    el.classList.add('reveal');
-    observer.observe(el);
-  });
-} else {
-  revealElements.forEach((el) => el.classList.add('is-visible'));
-}
+  // Close on nav link click
+  qsa("a", nav).forEach(link => link.addEventListener("click", close));
 
-if (window.lucide) {
-  window.lucide.createIcons();
-}
+  // Close on outside click
+  document.addEventListener("click", e => {
+    if (!nav.contains(e.target) && !toggle.contains(e.target)) close();
+  });
+
+  // Close on Escape
+  document.addEventListener("keydown", e => { if (e.key === "Escape") close(); });
+};
+
+/* ── 2. Header scroll effect ────────────────────────────────── */
+const setupHeaderScroll = () => {
+  const header = qs(".site-header");
+  if (!header) return;
+
+  const update = () => header.classList.toggle("scrolled", window.scrollY > 10);
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+};
+
+/* ── 3. Scroll-triggered animations ─────────────────────────── */
+const setupScrollAnimations = () => {
+  const elements = qsa("[data-animate]");
+  if (!elements.length) return;
+
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    elements.forEach(el => el.classList.add("is-visible"));
+    return;
+  }
+
+  document.body.classList.add("motion-ready");
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+  );
+
+  // Pre-mark elements already in viewport so they never flash invisible
+  const vh = window.innerHeight;
+  elements.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < vh && rect.bottom > 0) {
+      el.classList.add("is-visible");
+    } else {
+      observer.observe(el);
+    }
+  });
+};
+
+/* ── 4. Mascot interactions ─────────────────────────────────── */
+const setupMascot = () => {
+  const stage   = qs("[data-mascot-stage]");
+  if (!stage) return;
+
+  const btn       = qs(".who-mascot-3d-wrap", stage);
+  const triggers  = qsa(".keyword-trigger[data-mascot-reaction]");
+  if (!btn) return;
+
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  let rafId = 0;
+  let jumpTimer = 0;
+
+  /* ── Tilt (parallax 3D) ─── */
+  const setTilt = (x, y) => {
+    if (prefersReducedMotion) return;
+    cancelAnimationFrame(rafId);
+    rafId = requestAnimationFrame(() => {
+      stage.style.setProperty("--tilt-x", `${x.toFixed(2)}deg`);
+      stage.style.setProperty("--tilt-y", `${y.toFixed(2)}deg`);
+    });
+  };
+
+  const resetTilt = () => {
+    stage.style.setProperty("--tilt-x", "0deg");
+    stage.style.setProperty("--tilt-y", "0deg");
+  };
+
+  if (canHover) {
+    btn.addEventListener("pointermove", e => {
+      const r = btn.getBoundingClientRect();
+      const xRatio = (e.clientX - r.left) / r.width  - 0.5;
+      const yRatio = (e.clientY - r.top)  / r.height - 0.5;
+      setTilt(-yRatio * 9, xRatio * 12);
+    });
+    btn.addEventListener("pointerleave", resetTilt);
+    btn.addEventListener("pointercancel", resetTilt);
+  }
+
+  /* ── Speech bubble ─── */
+  const bubble     = qs("#mascot-speech");
+  const bubbleText = qs("#mascot-speech-text");
+  const phrases = [
+    "¡Hola! Soy el Gallo de Reggio",
+    "¿Listo para explorar?",
+    "¡Aquí aprendemos jugando!",
+    "¡La curiosidad es mi superpoder!",
+    "¡Ven a conocer la comunidad!",
+  ];
+  let phraseIndex = 0;
+  let bubbleTimer  = 0;
+  let isHovered    = false;
+
+  const showBubble = () => {
+    if (!bubble || !bubbleText || prefersReducedMotion) return;
+    bubbleText.textContent = phrases[phraseIndex % phrases.length];
+    phraseIndex++;
+    bubble.classList.add("is-visible");
+  };
+
+  const hideBubble = () => {
+    if (!bubble) return;
+    bubble.classList.remove("is-visible");
+  };
+
+  if (canHover) {
+    btn.addEventListener("mouseenter", () => {
+      isHovered = true;
+      showBubble();
+    });
+    btn.addEventListener("mouseleave", () => {
+      isHovered = false;
+      hideBubble();
+    });
+  }
+
+  btn.addEventListener("click", () => {
+    /* Jump */
+    if (!prefersReducedMotion) {
+      stage.classList.remove("is-jumping");
+      void stage.offsetWidth;
+      stage.classList.add("is-jumping");
+      clearTimeout(jumpTimer);
+      jumpTimer = setTimeout(() => stage.classList.remove("is-jumping"), 560);
+    }
+
+    /* On touch / click always show bubble briefly */
+    showBubble();
+    clearTimeout(bubbleTimer);
+    bubbleTimer = setTimeout(() => {
+      if (!isHovered) hideBubble();
+    }, 2400);
+  });
+
+  /* Rotate phrase every 6 s while hovered (desktop) */
+  if (canHover) {
+    setInterval(() => {
+      if (isHovered) showBubble();
+    }, 6000);
+  }
+
+  /* ── Keyword triggers ─── */
+  triggers.forEach(trigger => {
+    const reaction = trigger.dataset.mascotReaction;
+    let mobileTimer = 0;
+
+    const activate   = () => stage.classList.add(`is-${reaction}`);
+    const deactivate = () => stage.classList.remove(`is-${reaction}`);
+
+    trigger.addEventListener("mouseenter", activate);
+    trigger.addEventListener("mouseleave", deactivate);
+    trigger.addEventListener("focus",      activate);
+    trigger.addEventListener("blur",       deactivate);
+    trigger.addEventListener("click", () => {
+      activate();
+      clearTimeout(mobileTimer);
+      mobileTimer = setTimeout(deactivate, 900);
+    });
+  });
+};
+
+/* ── 5. Lightbox ─────────────────────────────────────────────── */
+const setupLightbox = () => {
+  const lightbox   = qs("#lightbox");
+  if (!lightbox) return;
+
+  const imgEl      = qs(".lightbox-img",     lightbox);
+  const captionEl  = qs(".lightbox-caption", lightbox);
+  const closeBtn   = qs(".lightbox-close",   lightbox);
+  const prevBtn    = qs(".lightbox-prev",    lightbox);
+  const nextBtn    = qs(".lightbox-next",    lightbox);
+
+  const items = qsa("[data-lightbox]");
+  if (!items.length) return;
+
+  let current = 0;
+  const sources = items.map(el => ({ src: el.dataset.src, caption: el.dataset.caption || "" }));
+
+  const show = (idx) => {
+    current = (idx + sources.length) % sources.length;
+    imgEl.src    = "";          // force reload animation
+    imgEl.alt    = sources[current].caption;
+    captionEl.textContent = sources[current].caption;
+
+    // Tiny delay so animation replays
+    requestAnimationFrame(() => { imgEl.src = sources[current].src; });
+
+    prevBtn.style.display = sources.length < 2 ? "none" : "";
+    nextBtn.style.display = sources.length < 2 ? "none" : "";
+  };
+
+  const openLightbox = (idx) => {
+    show(idx);
+    lightbox.removeAttribute("hidden");
+    lightbox.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+    closeBtn.focus();
+  };
+
+  const closeLightbox = () => {
+    lightbox.setAttribute("hidden", "");
+    lightbox.classList.remove("is-open");
+    document.body.style.overflow = "";
+    items[current].focus();
+  };
+
+  items.forEach((el, i) => {
+    el.addEventListener("click", () => openLightbox(i));
+  });
+
+  closeBtn.addEventListener("click", closeLightbox);
+  prevBtn.addEventListener("click",  () => show(current - 1));
+  nextBtn.addEventListener("click",  () => show(current + 1));
+
+  // Background click closes
+  lightbox.addEventListener("click", e => { if (e.target === lightbox) closeLightbox(); });
+
+  // Keyboard navigation
+  document.addEventListener("keydown", e => {
+    if (lightbox.hasAttribute("hidden")) return;
+    if (e.key === "Escape")      closeLightbox();
+    if (e.key === "ArrowLeft")   show(current - 1);
+    if (e.key === "ArrowRight")  show(current + 1);
+  });
+
+  // Touch swipe
+  let touchStartX = 0;
+  lightbox.addEventListener("touchstart", e => { touchStartX = e.changedTouches[0].clientX; }, { passive: true });
+  lightbox.addEventListener("touchend",   e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) show(dx < 0 ? current + 1 : current - 1);
+  }, { passive: true });
+};
+
+/* ── 6. FAQ Accordion ─────────────────────────────────────────── */
+const setupFAQ = () => {
+  // Native <details> handles toggle; we just add smooth animation
+  const items = qsa(".faq-item");
+
+  items.forEach(details => {
+    const summary = qs("summary", details);
+    const answer  = qs(".faq-answer", details);
+    if (!summary || !answer) return;
+
+    summary.addEventListener("click", () => {
+      // Close others (accordion behavior)
+      items.forEach(other => {
+        if (other !== details && other.open) {
+          other.removeAttribute("open");
+        }
+      });
+    });
+  });
+};
+
+/* ── 7. Contact Form Validation ──────────────────────────────── */
+const setupContactForm = () => {
+  const form       = qs("#contact-form");
+  if (!form) return;
+
+  const submitBtn  = qs("#submit-btn",  form);
+  const successMsg = qs("#form-success", form);
+  const btnText    = qs(".btn-text",    submitBtn);
+  const btnLoading = qs(".btn-loading", submitBtn);
+
+  const rules = {
+    nombre:   { required: true, minLength: 2,  message: "Ingresa tu nombre completo (mínimo 2 caracteres)." },
+    email:    { required: true, isEmail: true,  message: "Ingresa un correo electrónico válido." },
+    telefono: { required: false, pattern: /^[0-9]{10}$/, message: "El teléfono debe tener 10 dígitos (solo números)." },
+    mensaje:  { required: true, minLength: 10,  message: "El mensaje debe tener al menos 10 caracteres." },
+  };
+
+  const showError = (fieldId, msg) => {
+    const input = qs(`#${fieldId}`, form);
+    const error = qs(`#${fieldId}-error`, form);
+    if (input) input.classList.add("is-error");
+    if (error) error.textContent = msg;
+  };
+
+  const clearError = (fieldId) => {
+    const input = qs(`#${fieldId}`, form);
+    const error = qs(`#${fieldId}-error`, form);
+    if (input) input.classList.remove("is-error");
+    if (error) error.textContent = "";
+  };
+
+  const isValidEmail = email =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+
+  const validateField = (id, value) => {
+    const rule = rules[id];
+    if (!rule) return true;
+
+    if (rule.required && !value.trim()) {
+      showError(id, rule.message);
+      return false;
+    }
+    if (value.trim() && rule.minLength && value.trim().length < rule.minLength) {
+      showError(id, rule.message);
+      return false;
+    }
+    if (value.trim() && rule.isEmail && !isValidEmail(value)) {
+      showError(id, rule.message);
+      return false;
+    }
+    if (value.trim() && rule.pattern && !rule.pattern.test(value.trim())) {
+      showError(id, rule.message);
+      return false;
+    }
+
+    clearError(id);
+    return true;
+  };
+
+  // Live validation on blur
+  Object.keys(rules).forEach(id => {
+    const input = qs(`#${id}`, form);
+    if (!input) return;
+    input.addEventListener("blur", () => validateField(id, input.value));
+    input.addEventListener("input", () => {
+      if (input.classList.contains("is-error")) validateField(id, input.value);
+    });
+  });
+
+  form.addEventListener("submit", async e => {
+    e.preventDefault();
+
+    // Validate all fields
+    let valid = true;
+    Object.keys(rules).forEach(id => {
+      const input = qs(`#${id}`, form);
+      if (input && !validateField(id, input.value)) valid = false;
+    });
+
+    if (!valid) {
+      const firstError = qs(".is-error", form);
+      if (firstError) firstError.focus();
+      return;
+    }
+
+    // Submit
+    btnText.hidden    = true;
+    btnLoading.hidden = false;
+    submitBtn.disabled = true;
+
+    try {
+      const data     = new FormData(form);
+      const response = await fetch(form.action, {
+        method: "POST",
+        body:   data,
+        headers: { Accept: "application/json" },
+      });
+
+      if (response.ok) {
+        form.reset();
+        form.hidden        = true;
+        successMsg.hidden  = false;
+        successMsg.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      } else {
+        throw new Error("Server error");
+      }
+    } catch {
+      btnText.hidden    = false;
+      btnLoading.hidden = true;
+      submitBtn.disabled = false;
+      showError("mensaje", "Hubo un error al enviar. Intenta de nuevo o contáctanos por WhatsApp.");
+    }
+  });
+};
+
+/* ── 8. Smooth scroll offset for sticky header ─────────────── */
+const setupSmoothScroll = () => {
+  document.addEventListener("click", e => {
+    const anchor = e.target.closest('a[href^="#"]');
+    if (!anchor) return;
+
+    const id  = anchor.getAttribute("href").slice(1);
+    const el  = document.getElementById(id);
+    if (!el) return;
+
+    e.preventDefault();
+    const headerH = qs(".site-header")?.offsetHeight || 72;
+    const top     = el.getBoundingClientRect().top + window.scrollY - headerH - 8;
+    window.scrollTo({ top, behavior: prefersReducedMotion ? "instant" : "smooth" });
+
+    // Update URL without jumping
+    history.pushState(null, "", `#${id}`);
+  });
+};
+
+/* ── 9. Active nav link on scroll ──────────────────────────── */
+const setupActiveNav = () => {
+  const sections = qsa("section[id]");
+  const navLinks = qsa(".nav-link");
+  if (!sections.length || !navLinks.length) return;
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle("is-active", link.getAttribute("href") === `#${id}`);
+        });
+      });
+    },
+    { rootMargin: "-30% 0px -60% 0px" }
+  );
+
+  sections.forEach(s => observer.observe(s));
+};
+
+/* ── 10. Lazy-load iframe map ───────────────────────────────── */
+const setupLazyMap = () => {
+  const mapWrap = qs(".contact-map");
+  if (!mapWrap) return;
+
+  const iframe = qs("iframe", mapWrap);
+  if (!iframe) return;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      // iframe already has src set; just ensure it loads
+      if (!iframe.getAttribute("src")) {
+        iframe.setAttribute("src", iframe.dataset.src || "");
+      }
+      observer.unobserve(mapWrap);
+    });
+  }, { rootMargin: "200px" });
+
+  observer.observe(mapWrap);
+};
+
+/* ── Init ───────────────────────────────────────────────────── */
+document.addEventListener("DOMContentLoaded", () => {
+  setupMenu();
+  setupHeaderScroll();
+  setupScrollAnimations();
+  setupMascot();
+  setupLightbox();
+  setupFAQ();
+  setupContactForm();
+  setupSmoothScroll();
+  setupActiveNav();
+  setupLazyMap();
+});
